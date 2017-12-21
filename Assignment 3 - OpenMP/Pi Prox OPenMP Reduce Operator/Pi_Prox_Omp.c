@@ -1,5 +1,7 @@
 /*
 OpenMP calculating Pi constant.
+
+Author: Marios Aspris.
 */
 
 #include <stdio.h>

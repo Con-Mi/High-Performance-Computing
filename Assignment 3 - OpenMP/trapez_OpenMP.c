@@ -49,7 +49,7 @@ double f(double x)
 	return val;
 }
 
-void Trapez(double a, double b, int n, double* integral_p)
+void Trapez(double a, double b, int n, double *integral_p)
 {
 	double h, x, my_integral;
 	double local_a, local_b;

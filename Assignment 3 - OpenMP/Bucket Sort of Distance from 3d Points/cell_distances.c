@@ -41,12 +41,7 @@ int main(int argc, char **argv) {
 	}
 	/* 		   End of user input.		*/
 	
-
-	// Read the file "cells.txt". First count how
-	// many elements are in the file, in order to 
-	// allocate the memory with the correct size, 
-	// and avoid reallocation.
-
+	
 	float *x, *y, *z;
 	int file_size = 0;
 	float tmpr1, tmpr2, tmpr3;
@@ -69,8 +64,13 @@ int main(int argc, char **argv) {
 		++i;
 	}
 	fclose(fp);
-	/*
+	printf("z[4] = %f \n", z[4]);
 	
+	// In the calulate distances function I should use the reduce operator.
+	// Its like matrix multiplication, but keeping track of the index.
+	//calculate_distances()
+	
+	/*
 	// I need to reopen the file.
 	//Cells = (double **) malloc(sizeof(double) * counter/3);
 	for (int i = 0; i < counter/3; ++i)
