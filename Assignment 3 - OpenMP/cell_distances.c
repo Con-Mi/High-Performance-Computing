@@ -14,70 +14,69 @@
 #include <math.h>
 #include <omp.h>
 
-// Global variables
-double *distances;
-int nrOfBuckets = 3464; // Maximum number of buckets for the specfic problem.
-double *buckets;
-static size_t nrOfThreads;
 
-// Struct for the coordinates.
-struct coordinate {
-	float x;
-	float y;
-	float z;
-};
-
-struct bucket {
-	float value;
-	int count;
-};
-
-struct coordinate *Cells;
 // Function definitions
-void get_distance(struct coordinate , struct coordinate consequent_cell);
+//void get_distance(struct coordinate , struct coordinate consequent_cell);
 
 
-////////////////////////////////////
 
-// Main body.
 
-int main(int argc, char *argv[]) {
+/* Main body. */
 
+int main(int argc, char **argv) {
+
+	/* User inputs to the program. */
 	int opt;
-
+	int nr_threads;
 	while ((opt = getopt(argc, argv, "t:")) != -1) 
 	{
 		switch(opt) {
-		case "t":
+		case 't':
 			nr_threads = atoi(optarg);
 			break;
 		default:
-			printf(stderr, "Usage %s [-t Number of Threads] \n", argv[0]);
+			fprintf(stderr, "Usage %s [-t Number of Threads] (without brackets.)\n", argv[0]);
 			exit(EXIT_FAILURE);
+		}
 	}
+	/* 		   End of user input.		*/
+	
 
 	// Read the file "cells.txt". First count how
 	// many elements are in the file, in order to 
 	// allocate the memory with the correct size, 
 	// and avoid reallocation.
 
-	double c;
-	int counter = 0;
-	double Vect;
+	float *x, *y, *z;
+	int file_size = 0;
+	float tmpr1, tmpr2, tmpr3;
 
 	FILE *fp = fopen("cells.txt", "r");
-	while (c = fscanf(fp, "%lf", Vect))
+	while (fscanf(fp, "%f %f %f", &tmpr1, &tmpr2, &tmpr3) != EOF)
 	{
-		if (c == EOF) break;
-		counter += 1;
+		++file_size;
 	}
-	fclose(fp)
+	fclose(fp);
+	
+	int i = 0;
+	x = malloc(file_size * sizeof(float));
+	y = malloc(file_size * sizeof(float));
+	z = malloc(file_size * sizeof(float));
+
+	fp = fopen("cells.txt", "r");
+	while (fscanf(fp, "%f %f %f", &x[i], &y[i], &z[i]) != EOF)
+	{
+		++i;
+	}
+	fclose(fp);
+	/*
+	
 	// I need to reopen the file.
-	/*Cells = (double **) malloc(sizeof(double) * counter/3);
+	//Cells = (double **) malloc(sizeof(double) * counter/3);
 	for (int i = 0; i < counter/3; ++i)
 		Cells[i] = (double *) malloc(sizeof(double) * 3);
-	*/
-	Cells = (struct coordinate *) malloc(sizeof(struct coordinate) * (counter/3)); 
+	//
+	Cells = malloc(sizeof(struct coordinate) * (counter/3)); 
 
 	FILE file = fopen("cells.txt", "r");
 
@@ -89,10 +88,16 @@ int main(int argc, char *argv[]) {
 	
 	#pragma omp parallel num_threads(nrOfThreads)
 	get_sorted_distances();
+	*/
+	free(x);
+	free(y);
+	free(z);
+	return 0;
+	
 }
 
 ////////////////////////////////////
-
+/*
 void get_sorted_distances(struct coordinate Cells[], struct bucket buckets[])
 {
 	for (int i = 0; i < counter/3; ++i) {
@@ -107,3 +112,4 @@ void get_sorted_distances(struct coordinate Cells[], struct bucket buckets[])
 			buckets[distans * 100] = distans;
 	}
 }
+*/
