@@ -1,0 +1,143 @@
+<h1 id="assignment-1---marios-aspris">Assignment 1 - Marios Aspris</h1>
+<h1 id="civic-code-880415-t994">Civic code: 880415-T994</h1>
+<h2 id="task-1---timing.">Task 1 - Timing.</h2>
+<h4 id="timing-the-sum-using-newtons-method-with-the-different-optimization-levels.-this-is-not-the-general-implementation-of-the-sum-b-ab-a12-with-ba-so-i-can-avoid-the-if-statement.-therefore-it-is-implemented-the-formula-for-the-sum-nn12-using-a-macro.-the--o0-level-is-basic-no-optimization-only-the-rest.-the-following-table-shows-the-optimization-timing-results.">Timing the sum using Newton's method with the different optimization levels. This is not the general implementation of the sum, <span class="math inline">(<em>b</em> − <em>a</em>)*((<em>b</em> − <em>a</em>)+1)/2</span>, with <span class="math inline"><em>b</em> &lt; <em>a</em></span>, so I can avoid the if statement. Therefore it is implemented the formula for the sum, <span class="math inline"><em>n</em> * (<em>n</em> + 1)/2</span> using a macro. The -O0 level is basic no optimization, only the rest. The following table shows the optimization timing results.</h4>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Optimization Level</th>
+<th align="left">Timing</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">-O0</td>
+<td align="left">0.000054 secs</td>
+</tr>
+<tr class="even">
+<td align="left">-O1</td>
+<td align="left">0.000053 secs</td>
+</tr>
+<tr class="odd">
+<td align="left">-O2</td>
+<td align="left">0.000055 secs</td>
+</tr>
+<tr class="even">
+<td align="left">-03</td>
+<td align="left">0.000050 secs</td>
+</tr>
+<tr class="odd">
+<td align="left">-Os</td>
+<td align="left">0.000057 secs</td>
+</tr>
+<tr class="even">
+<td align="left">-Og</td>
+<td align="left">0.000051 secs</td>
+</tr>
+</tbody>
+</table>
+<h4 id="in-the-assembly-code-of-the-optimization-levels-the--o2-and--o3-do-not-seem-to-change.">In the assembly code of the optimization levels, the -O2 and -O3 do not seem to change.</h4>
+<h2 id="section"></h2>
+<h2 id="task-2---inlining.">Task 2 - Inlining.</h2>
+<h4 id="timing-the-inlining-programs.-first-for-using-a-function-from-a-separate-file-i-use">Timing the inlining programs. First for using a function from a separate file I use:</h4>
+<h4 id="gcc--c-mul_cpx.c">' gcc -c mul_cpx.c '</h4>
+<h4 id="gcc--c-inlining.c">' gcc -c Inlining.c '</h4>
+<h4 id="gcc--o-inlining-mul_cpx.o-inlining.o">' gcc -o Inlining mul_cpx.o Inlining.o '</h4>
+<h4 id="the-following-results-are-obtained-by-compiling-the-programs-inlining.c-mul_cpx.c-inlining1.c-inlining2.c">The following results are obtained by compiling the programs ' Inlining.c, mul_cpx.c, Inlining1.c, Inlining2.c '</h4>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Different Inlining Versions</th>
+<th align="left">Timing</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Inilining.c, Inlining with outside function</td>
+<td align="left">0.004161 secs</td>
+</tr>
+<tr class="even">
+<td align="left">Inlining1.c, Inlining with function inside the program</td>
+<td align="left">0.0041044 secs</td>
+</tr>
+<tr class="odd">
+<td align="left">Inlining2.c, Inlining by hand</td>
+<td align="left">0.004307 secs</td>
+</tr>
+</tbody>
+</table>
+<h4 id="here-we-can-observe-that-the-fastest-way-is-to-have-the-function-inside-of-the-program.-calling-a-function-takes-time-for-c-when-i-compile-and-run-it.-i-assume-that-the-gcc-compiler-does-something-automatically-when-the-function-is-inside-the-program.">Here we can observe that the fastest way is to have the function inside of the program. Calling a function takes time for C when I compile and run it. I assume that the gcc compiler does something automatically when the function is inside the program.</h4>
+<h2 id="section-1"></h2>
+<h2 id="task-3---locality">Task 3 - Locality</h2>
+<h4 id="the-following-results-are-obtained-from-doing-row-sums-and-column-sums-with-naive-and-fast-implementations.">The following results are obtained from doing row sums and column sums with naive, and fast implementations.</h4>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Optimization Level</th>
+<th align="left">Timing Naive Implementation</th>
+<th align="left">Timing Fast Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">-O0 No Optmization level</td>
+<td align="left">0.047373</td>
+<td align="left">0.037556</td>
+</tr>
+<tr class="even">
+<td align="left">-O3</td>
+<td align="left">0.021678</td>
+<td align="left">0.022130</td>
+</tr>
+</tbody>
+</table>
+<h2 id="section-2"></h2>
+<h2 id="task-4---indirect-adressing">Task 4 - Indirect Adressing</h2>
+<h4 id="comparing-timings-for-indirect-adressing-and-direct-adressing-with-and-without-optimization.-for-te-optimization-level-i-use--ofast-to-compare.">Comparing timings for indirect adressing and direct adressing, with and without optimization. For te optimization level I use -Ofast to compare.</h4>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">Indirect Adressing Time</th>
+<th align="left">Direct Adressing Time</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Optimization with -Ofast</td>
+<td align="left">0.000000 sec</td>
+<td align="left">0.000000 sec</td>
+</tr>
+<tr class="even">
+<td align="left">No Optimization</td>
+<td align="left">0.00000 sec</td>
+<td align="left">0.000000 sec</td>
+</tr>
+</tbody>
+</table>
+<h4 id="it-seems-that-i-do-not-see-any-differences-in-the-timing.">It seems that I do not see any differences in the timing.</h4>
+<h2 id="section-3"></h2>
+<h2 id="task-5---valgrind">Task 5 - Valgrind</h2>
+<h4 id="i-create-the-program-with-allocating-memory-with-the-command-malloc-and-then-i-do-not-free-it.-it-seems-that-the-program-takes-some-time-to-run.-then-use-the-command-valgrind-.a.out-it-outputs-details-on-memory-leak.-the-valgrind-command-has-as-a-degault-option---toolsmemcheck-according-to-documentation-so-it-does-not-need-to-be-specified.-then-i-output-the-report-from-valgrind-command.-since-with-malloc-we-are-doing-dynamic-memory-allocation-the-heap-summary-says-that-4000-bytes-were-in-use-at-exit-and-there-were-definitely-lost.-hence-there-is-a-leak-in-memory.-in-the-c-language-as-far-as-i-know-there-is-no-garbage-collector-and-checking-if-there-are-memory-leaks-in-a-program-are-important.">I create the program with allocating memory with the command malloc() and then I do not free it. It seems that the program takes some time to run. Then use the command valgrind ./a.out, it outputs details on memory leak. The valgrind command has as a degault option --tools=memcheck according to documentation, so it does not need to be specified. Then I output the report from valgrind command. Since with malloc we are doing dynamic memory allocation, the heap summary says that 4000 bytes were in use at exit, and there were definitely lost. Hence there is a leak in memory. In the C language as far as I know there is no garbage collector, and checking if there are memory leaks in a program are important.</h4>
+<h2 id="section-4"></h2>
+<h2 id="task-5---profiling">Task 5 - Profiling</h2>
+<h4 id="section-5"></h4>
+<h4 id="using-gprof-for-profiling-i-first-use-the-following-commands.">Using gprof for profiling I first use the following commands.</h4>
+<h4 id="gcc--wall--pg-locality.c--o-test_gprof">gcc -Wall -pg locality.c -o test_gprof</h4>
+<h4 id="gprof-test_gprof-gmon.out-analysis.txt">gprof test_gprof gmon.out &gt; analysis.txt</h4>
+<h4 id="gedit-analysis.txt">gedit analysis.txt</h4>
+<h4 id="section-6">//////</h4>
+<h4 id="gcc--wall--pg-localityfast.c--o-test_gprof_fast">gcc -Wall -pg localityFast.c -o test_gprof_fast</h4>
+<h4 id="gprof-test_gprof_fast-gmon.out-analysisfast.txt">gprof test_gprof_fast gmon.out &gt; analysisFast.txt</h4>
+<h4 id="gedit-analysisfast.txt">gedit analysisFast.txt</h4>
+<h4 id="section-7">//////</h4>
+<h4 id="comparing-the-analysis-text-for-the-two-implementations-it-seems-that-we-have-two-calls-of-the-loop-in-the-fast-implementation-and-two-seperate-calls-for-the-for-loops-in-the-naive-implementations.">Comparing the analysis text for the two implementations, it seems that we have two calls of the loop in the fast implementation and two seperate calls for the for loops in the naive implementations.</h4>
+<h4 id="for-gcov-i-used-the-following">For gcov I used the following:</h4>
+<h4 id="gcc--fprofile-arcs--ftest-coverage-locality.c">gcc -fprofile-arcs -ftest-coverage locality.c</h4>
+<h4 id="gcov-locality.c">gcov locality.c</h4>
+<h4 id="gedit-locality.c.gcov">gedit locality.c.gcov</h4>
+<h4 id="similar-for-the-fast-implementation">// Similar for the fast implementation//</h4>
+<h4 id="gcc--fprofile-arcs--ftest-coverage-localityfast.c">gcc -fprofile-arcs -ftest-coverage localityFast.c</h4>
+<h4 id="gcov-localityfast.c">gcov localityFast.c</h4>
+<h4 id="gedit-localityfast.c.gcov">gedit localityFast.c.gcov</h4>
+<h4 id="the-number-of-for-loops-executed-are-shown-on-the-left.-for-the-naive-implementation-the-number-of-loops-executed-is-much-more-bigger-as-there-are-executed-separately.">The number of for loops executed are shown on the left. For the naive implementation the number of loops executed is much more bigger as there are executed separately.</h4>
